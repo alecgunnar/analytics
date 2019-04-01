@@ -1,18 +1,23 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <CreateAppForm @created="appCreated" />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import CreateAppForm from "../components/createApp/CreateAppForm";
 export default {
   name: 'home',
+  methods: {
+    appCreated (id) {
+      this.$router.push({
+        name: 'appOverview',
+        params: {id}
+      })
+    }
+  },
   components: {
-    HelloWorld
+    CreateAppForm
   }
 }
 </script>

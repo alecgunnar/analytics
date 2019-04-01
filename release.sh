@@ -9,8 +9,9 @@ popd
 pushd frontend
 yarn install
 yarn test:unit
-yarn test:e2e
 popd
+
+./gradlew e2e
 
 git push
 
