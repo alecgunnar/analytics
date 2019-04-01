@@ -1,2 +1,4 @@
 .backend.pid.lock
 .frontend.pid.lock
+
+.gradle
