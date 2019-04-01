@@ -7,3 +7,10 @@ task stopApp {
   dependsOn ':backend:stop'
   dependsOn ':frontend:stop'
 }
+
+task e2e {
+  dependsOn 'startApp'
+  dependsOn ':frontend:e2e'
+  dependsOn 'stopApp'
+}
+
