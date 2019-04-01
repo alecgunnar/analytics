@@ -1,0 +1,20 @@
+plugins {
+  id "com.wiredforcode.spawn" version "0.8.2"
+}
+
+task start(type: SpawnProcessTask, dependsOn: 'install') {
+  command "npm --prefix ${projectDir} run serve -- --port 8081"
+  ready 'App running at:'
+  pidLockFileName '.frontend.pid.lock'
+}
+
+task stop(type: KillProcessTask) {
+  pidLockFileName '.frontend.pid.lock'
+}
+
+task install(type: Exec) {
+  executable 'yarn'
+  args 'install'
+}
+
+

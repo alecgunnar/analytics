@@ -1,0 +1,9 @@
+task startApp {
+  dependsOn ':backend:start'
+  dependsOn ':frontend:start'
+}
+
+task stopApp {
+  dependsOn ':backend:stop'
+  dependsOn ':frontend:stop'
+}

@@ -1,0 +1,5 @@
+rootProject.name = "analytics"
+
+include 'backend'
+include 'frontend'
+
