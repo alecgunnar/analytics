@@ -1,18 +1,12 @@
-const storage = []
+import axios from 'axios'
 
 export default {
-    createApplication(name) {
-        const id = Math.floor(Math.random() * 1000000)
-
-        storage.push({
-            id, name
-        })
-
-        return new Promise(resolve => resolve(id))
+    async createApplication(name) {
+        const response = await axios.post('http://localhost:8080/apps', {name})
+        return response.data.data.id
     },
-    loadApplication(id) {
-        return new Promise((resolve) => {
-            resolve(storage.find(app => app.id === id))
-        })
+    async loadApplication(id) {
+        const response = await axios.get(`http://localhost:8080/apps/${id}`)
+        return response.data
     }
 }

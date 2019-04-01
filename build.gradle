@@ -11,6 +11,7 @@ task stopApp {
 task e2e {
   dependsOn 'startApp'
   dependsOn ':frontend:e2e'
-  dependsOn 'stopApp'
 }
+
+stopApp.mustRunAfter e2e
 
