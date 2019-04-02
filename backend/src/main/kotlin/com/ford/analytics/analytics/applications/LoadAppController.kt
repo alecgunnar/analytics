@@ -17,7 +17,7 @@ class LoadAppController(
     ): AnalyticsApp {
         val app = appsService.loadApp(id)
 
-        if (app == null) throw AppNotFoundException()
+        app ?: throw AppNotFoundException()
 
         return app
     }

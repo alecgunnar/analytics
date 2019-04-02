@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse
 class CreateAppController(
         val appsService: AppsService
 ) {
-    @CrossOrigin(origins = ["http://localhost:8081"])
     @PostMapping("/apps")
     fun createApp(
             @RequestBody createAppRequest: CreateAppRequest,

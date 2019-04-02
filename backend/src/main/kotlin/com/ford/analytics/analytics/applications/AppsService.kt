@@ -17,7 +17,5 @@ class AppsService {
         return newApp
     }
 
-    fun loadApp(id: UUID): AnalyticsApp? {
-        return storage.find { it.id == id }
-    }
+    fun loadApp(id: UUID): AnalyticsApp? = storage.find { it.id == id }
 }
