@@ -21,4 +21,9 @@ class LoadAppController(
 
         return app
     }
+
+    @GetMapping("/apps")
+    fun loadApps(): List<AnalyticsApp> {
+        return appsService.loadApps()
+    }
 }

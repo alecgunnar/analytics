@@ -1,5 +1,6 @@
 import Home from '@/views/Home'
-import CreateAppForm from '@/components/createApp/CreateAppForm'
+import CreateAppForm from '@/components/loadApp/CreateAppForm'
+import LoadAppForm from '@/components/loadApp/LoadAppForm'
 import {shallowMount, createLocalVue} from "@vue/test-utils";
 import Router from "vue-router"
 import {expect} from "chai"
@@ -26,11 +27,32 @@ describe('CreateAppForm', () => {
         expect(subject.find(CreateAppForm).exists()).to.be.true
     })
 
+    it('has a load app form', () => {
+        expect(subject.find(LoadAppForm).exists()).to.be.true
+    })
+
     context('an app is created', () => {
         beforeEach(() => {
             sinon.stub(router, 'push')
 
             subject.find(CreateAppForm).vm.$emit('created', 'c3e83b52-84d1-4f70-8137-fcc270752aec')
+        })
+
+        afterEach(() => {
+            router.push.restore()
+        })
+
+        it('sends the user to the app', () => {
+            sinon.assert.calledOnce(router.push)
+            sinon.assert.calledWith(router.push, {name: 'appOverview', params: {id: 'c3e83b52-84d1-4f70-8137-fcc270752aec'}})
+        })
+    })
+
+    context('an app is loaded', () => {
+        beforeEach(() => {
+            sinon.stub(router, 'push')
+
+            subject.find(LoadAppForm).vm.$emit('loaded', 'c3e83b52-84d1-4f70-8137-fcc270752aec')
         })
 
         afterEach(() => {

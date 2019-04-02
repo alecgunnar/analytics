@@ -18,4 +18,10 @@ class AppsService {
     }
 
     fun loadApp(id: UUID): AnalyticsApp? = storage.find { it.id == id }
+
+    fun loadApps(): List<AnalyticsApp> = storage
+
+    fun deleteApps() {
+        storage.clear()
+    }
 }

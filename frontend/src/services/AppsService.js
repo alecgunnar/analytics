@@ -8,5 +8,9 @@ export default {
     async loadApplication(id) {
         const response = await axios.get(`http://localhost:8080/apps/${id}`)
         return response.data
+    },
+    async loadApplications() {
+        const response = await axios.get('http://localhost:8080/apps')
+        return response.data
     }
 }

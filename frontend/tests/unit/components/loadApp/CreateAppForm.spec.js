@@ -1,4 +1,4 @@
-import CreateAppForm from '@/components/createApp/CreateAppForm'
+import CreateAppForm from '@/components/loadApp/CreateAppForm'
 import AppsService from "@/services/AppsService"
 import {shallowMount} from "@vue/test-utils";
 import {expect} from "chai"

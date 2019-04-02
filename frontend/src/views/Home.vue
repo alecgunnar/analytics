@@ -1,15 +1,19 @@
 <template>
   <div class="home">
-    <CreateAppForm @created="appCreated" />
+    <h1>Welcome</h1>
+    <CreateAppForm @created="goToApp" />
+    <LoadAppForm @loaded="goToApp" />
   </div>
 </template>
 
 <script>
-import CreateAppForm from "../components/createApp/CreateAppForm";
+import CreateAppForm from "../components/loadApp/CreateAppForm";
+import LoadAppForm from "../components/loadApp/LoadAppForm";
+
 export default {
   name: 'home',
   methods: {
-    appCreated (id) {
+    goToApp (id) {
       this.$router.push({
         name: 'appOverview',
         params: {id}
@@ -17,6 +21,7 @@ export default {
     }
   },
   components: {
+    LoadAppForm,
     CreateAppForm
   }
 }

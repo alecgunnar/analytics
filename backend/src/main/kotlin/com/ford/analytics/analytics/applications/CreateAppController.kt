@@ -21,4 +21,9 @@ class CreateAppController(
 
         return CreatedResponse("Ok", "Created application", createdApp)
     }
+
+    @DeleteMapping("/apps")
+    fun deleteApps() {
+        appsService.deleteApps()
+    }
 }

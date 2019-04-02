@@ -28,4 +28,29 @@ class AppsServiceTest {
 
         assertThat(retrievedApp).isSameAs(createdApp)
     }
+
+    @Test
+    fun `all created apps can be retrieved`() {
+        val subject = AppsService()
+
+        val appOne = subject.saveApp(CreateAppRequest("Sample1"))
+        val appTwo = subject.saveApp(CreateAppRequest("Sample2"))
+
+        val allApps = subject.loadApps()
+
+        assertThat(allApps).containsExactly(
+                appOne, appTwo
+        )
+    }
+
+    @Test
+    fun `all apps can be deleted`() {
+        val subject = AppsService()
+
+        subject.saveApp(CreateAppRequest("Sample1"))
+
+        subject.deleteApps()
+
+        assertThat(subject.loadApps()).isEmpty()
+    }
 }

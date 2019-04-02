@@ -89,4 +89,49 @@ describe('AppsService', () => {
             })
         })
     })
+
+    context('loading all apps', () => {
+        let loadAppsPromise
+
+        beforeEach(() => {
+            loadAppsPromise = SynchronousPromise.unresolved()
+
+            sinon.stub(axios, 'get').returns(loadAppsPromise)
+        })
+
+        afterEach(() => {
+            axios.get.restore()
+        })
+
+        it('gets the data from the backend', () => {
+            AppsService.loadApplications()
+
+            sinon.assert.calledOnce(axios.get)
+            sinon.assert.calledWith(axios.get, 'http://localhost:8080/apps')
+        })
+
+        context('the server responds', () => {
+            beforeEach(() => {
+                loadAppsPromise.resolve({
+                    data: [
+                        {
+                            id: '45133225-c57a-4a48-a1e1-7ee125532c0b',
+                            name: 'sample'
+                        }
+                    ]
+                })
+            })
+
+            it('resolves with just the id', async () => {
+                const id = await AppsService.loadApplications()
+
+                expect(id).to.deep.equal([
+                    {
+                        id: '45133225-c57a-4a48-a1e1-7ee125532c0b',
+                        name: 'sample'
+                    }
+                ])
+            })
+        })
+    })
 })

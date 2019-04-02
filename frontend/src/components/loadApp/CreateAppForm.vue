@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Create an app</h1>
+        <h2>Create an app</h2>
         <input data-qa="new-app-name-input"
                v-model="appName" />
         <button data-qa="create-app-submit-button"
