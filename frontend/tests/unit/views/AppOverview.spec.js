@@ -2,12 +2,15 @@ import {shallowMount} from "@vue/test-utils";
 import {expect} from "chai"
 import sinon from "sinon"
 import {SynchronousPromise} from "synchronous-promise";
+import Router from 'vue-router'
 import AppOverview from '@/views/AppOverview'
 import AppsService from '@/services/AppsService'
 import HitsCounter from '@/components/overview/HitsCounter'
 
 describe('AppOverview', () => {
     let subject
+
+    let $router
 
     let loadDataPromise
 
@@ -22,8 +25,11 @@ describe('AppOverview', () => {
             }
         }
 
+        $router = new Router()
+
         subject = shallowMount(AppOverview, {
             mocks: {
+                $router,
                 $route
             }
         })
@@ -65,6 +71,28 @@ describe('AppOverview', () => {
 
             expect(hitsCounter.exists()).to.be.true
             expect(hitsCounter.props('app')).to.deep.equal(appData)
+        })
+    })
+
+    context('the app data cannot be loaded', () => {
+        beforeEach(() => {
+            sinon.stub($router, 'push')
+
+            loadDataPromise.reject()
+        })
+
+        afterEach(() => {
+            $router.push.restore()
+        })
+
+        it('redirects to the error page', () => {
+            sinon.assert.calledOnce($router.push)
+            sinon.assert.calledWith($router.push, {
+                name: 'error',
+                params: {
+                    type: '404'
+                }
+            })
         })
     })
 })

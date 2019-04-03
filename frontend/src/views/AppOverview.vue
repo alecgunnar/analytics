@@ -21,9 +21,22 @@
             }
         },
         mounted () {
-            AppsService.loadApplication(this.$route.params.id).then((data) => {
+            AppsService.loadApplication(this.$route.params.id)
+                .then(this.appLoaded)
+                .catch(this.appNotLoaded)
+        },
+        methods: {
+            appLoaded (data) {
                 this.app = data
-            })
+            },
+            appNotLoaded () {
+                this.$router.push({
+                    name: 'error',
+                    params: {
+                        type: '404'
+                    }
+                })
+            }
         },
         components: {
             HitsCounter
