@@ -1,7 +1,7 @@
 <template>
     <div>
         <div v-if="app === null"
-             data-qa="loading"></div>
+             data-qa="loading">Loading...</div>
         <div v-else>
             <h1 data-qa="app-name">{{ app.name }}</h1>
         </div>
