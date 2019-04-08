@@ -12,7 +12,13 @@ data class AppEntity(
         @GeneratedValue
         val id: UUID = UUID.randomUUID(),
 
-        val name: String = ""
+        val name: String = "",
+
+        var hits: Int = 0
 ) {
         fun toDto(): AnalyticsApp = AnalyticsApp(id, name)
+
+        fun incrementHitsCount() {
+                hits++
+        }
 }
