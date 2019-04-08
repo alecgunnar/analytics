@@ -1,4 +1,4 @@
-package com.ford.analytics.analytics.analytics
+package com.ford.analytics.analytics.applications.analytics
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test

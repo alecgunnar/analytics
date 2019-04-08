@@ -1,4 +1,4 @@
-package com.ford.analytics.analytics.analytics
+package com.ford.analytics.analytics.applications.analytics
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.ford.analytics.analytics.AbstractIntegrationTest
