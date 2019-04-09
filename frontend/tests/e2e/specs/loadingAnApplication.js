@@ -29,7 +29,7 @@ module.exports = {
     'there are no hits immediately after creating the app': browser => {
         browser.assert.containsText('[data-qa=hits-count]', '0')
     },
-    'analytics can be collected': browser => {
+    'analytics can be collected on a tracked page': browser => {
         browser.getText('[data-qa=client-script]', (result) => {
             const server = http.createServer((request, response) => {
                 response.write(`<!DOCTYPE html><html><head><title>e2e</title></head><body><div data-qa="analytics-sample"></div>${result.value}</body></html>`)
@@ -42,7 +42,8 @@ module.exports = {
 
         browser.url('http://localhost:8082')
         browser.waitForElementPresent('[data-qa=analytics-sample]', 5000)
-
+    },
+    'the hits count is updated after the tracked page is visited': browser => {
         browser
             .url(process.env.VUE_DEV_SERVER_URL)
 
