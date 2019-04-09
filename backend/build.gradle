@@ -43,7 +43,9 @@ compileTestKotlin {
 }
 
 task start(type: SpawnProcessTask) {
-  command("java -jar ${projectDir}/build/libs/analytics-RELEASE.jar -Dserver.port=8080")
+  dependsOn build
+
+  command("java -jar ${projectDir}/build/libs/backend-RELEASE.jar -Dserver.port=8080")
   ready("Tomcat started on port(s): 8080")
   pidLockFileName(".backend.pid.lock")
 }
