@@ -3,7 +3,7 @@
 set -e
 
 pushd backend
-./gradlew build
+./gradlew clean build
 popd
 
 pushd frontend
