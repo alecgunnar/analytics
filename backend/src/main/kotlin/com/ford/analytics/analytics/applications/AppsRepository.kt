@@ -1,4 +1,4 @@
-package com.ford.analytics.analytics
+package com.ford.analytics.analytics.applications
 
 import com.ford.analytics.analytics.data.AppEntity
 import org.springframework.data.repository.CrudRepository

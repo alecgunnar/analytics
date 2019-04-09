@@ -1,6 +1,6 @@
 package com.ford.analytics.analytics.applications.analytics
 
-import com.ford.analytics.analytics.AppsRepository
+import com.ford.analytics.analytics.applications.AppsRepository
 import com.ford.analytics.analytics.applications.analytics.data.HitsCount
 import org.springframework.stereotype.Service
 import java.util.*

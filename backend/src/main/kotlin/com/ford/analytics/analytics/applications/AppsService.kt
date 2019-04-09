@@ -1,6 +1,5 @@
 package com.ford.analytics.analytics.applications
 
-import com.ford.analytics.analytics.AppsRepository
 import com.ford.analytics.analytics.applications.data.AnalyticsApp
 import com.ford.analytics.analytics.applications.data.CreateAppRequest
 import com.ford.analytics.analytics.data.AppEntity
