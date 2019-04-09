@@ -1,7 +1,9 @@
 package com.ford.analytics.analytics.applications.analytics.data
 
-data class Tag(
-        val name: String,
+import java.net.URL
+
+data class Page(
+        val url: URL,
 
         val count: Int
 )
