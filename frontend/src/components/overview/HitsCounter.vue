@@ -2,6 +2,16 @@
     <div>
         <div data-qa="hits-count">{{ count }}</div>
         Total Hits
+        <ul data-qa="pages-list"
+            v-if="pages.length">
+            <li data-qa="listed-page"
+                v-for="page in pages"
+                :key="page.url">
+                {{ page.url }} {{ page.count }}
+            </li>
+        </ul>
+        <div data-qa="no-pages-message"
+             v-else>No pages have been hit.</div>
     </div>
 </template>
 
@@ -14,7 +24,8 @@
         name: "HitsCounter",
         data () {
             return {
-                count: 0
+                count: 0,
+                pages: []
             }
         },
         props: {
@@ -28,6 +39,7 @@
         methods: {
             hitsCountLoaded (data) {
                 this.count = data.count
+                this.pages = data.pages
 
                 timeoutId = setTimeout(this.loadHitsCount, 5000)
             },

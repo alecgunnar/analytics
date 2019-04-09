@@ -33,6 +33,11 @@ describe('HitsCounter', () => {
         expect(subject.find('[data-qa=hits-count]').text()).to.equal('0')
     })
 
+    it('defaults to the no tags message', () => {
+        expect(subject.find('[data-qa=pages-list]').exists()).to.be.false
+        expect(subject.find('[data-qa=no-pages-message]').exists()).to.be.true
+    })
+
     it('loads hits from the service', () => {
         sinon.assert.calledOnce(AnalyticsService.loadHitsCount)
         sinon.assert.calledWith(AnalyticsService.loadHitsCount, '43ae2eec-5607-11e9-8647-d663bd873d93')
@@ -43,7 +48,17 @@ describe('HitsCounter', () => {
             sinon.stub(global, 'setTimeout').returns(123098)
 
             loadHitsCountPromise.resolve({
-                count: 123
+                count: 123,
+                pages: [
+                    {
+                        url: 'http://www.sample.com',
+                        count: 115
+                    },
+                    {
+                        url: 'http://www.sample.com/buy-now',
+                        count: 8
+                    }
+                ]
             })
         })
 
@@ -53,6 +68,16 @@ describe('HitsCounter', () => {
 
         it('shows the number of hits', () => {
             expect(subject.find('[data-qa=hits-count]').text()).to.equal('123')
+        })
+
+        it('shows the pages that were hit', () => {
+            expect(subject.find('[data-qa=pages-list]').exists()).to.be.true
+            expect(subject.find('[data-qa=no-pages-message]').exists()).to.be.false
+
+            const listedPages = subject.findAll('[data-qa=listed-page]');
+
+            expect(listedPages.length).to.equal(2)
+            expect(listedPages.at(0).text()).to.equal('http://www.sample.com 115')
         })
 
         it('schedules an interval to check for hits', () => {
@@ -83,7 +108,8 @@ describe('HitsCounter', () => {
             context('the hits count is loaded', () => {
                 beforeEach(() => {
                     reloadHitsPromise.resolve({
-                        count: 456
+                        count: 456,
+                        pages: []
                     })
                 })
 
