@@ -1,1 +1,5 @@
-console.log('Analytics Client')
+var analytics = {
+    run: function (appId) {
+        console.log('Analytics Client', appId);
+    }
+};

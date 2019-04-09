@@ -57,6 +57,18 @@ class LoadAppControllerTest : AbstractIntegrationTest() {
                         "]"))
     }
 
+    @Test
+    fun `the script for the application can be retrieved`() {
+        val id = createApplication("test app")
+
+        mockMvc.perform(
+                get("/apps/$id/script")
+        ).andExpect(status().isOk)
+                .andExpect(content().json("{" +
+                        "   \"script\": \"<script>var a = '$id';var s = document.createElement('script');s.src = 'http://localhost:8080/client';s.onload = function() {analytics.run(a);};document.body.appendChild(s);</script>\"" +
+                        "}"))
+    }
+
     private fun createApplication(appName: String): String {
         val createAppRequest = mockMvc.perform(
                 post("/apps")

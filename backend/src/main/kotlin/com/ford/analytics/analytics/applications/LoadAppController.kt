@@ -1,6 +1,7 @@
 package com.ford.analytics.analytics.applications
 
 import com.ford.analytics.analytics.applications.data.AnalyticsApp
+import com.ford.analytics.analytics.applications.data.AnalyticsAppScript
 import com.ford.analytics.analytics.applications.exceptions.AppNotFoundException
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -25,5 +26,12 @@ class LoadAppController(
     @GetMapping("/apps")
     fun loadApps(): List<AnalyticsApp> {
         return appsService.loadApps()
+    }
+
+    @GetMapping("/apps/{id}/script")
+    fun getAppScript(
+            @PathVariable id: UUID
+    ): AnalyticsAppScript {
+        return AnalyticsAppScript(id)
     }
 }
