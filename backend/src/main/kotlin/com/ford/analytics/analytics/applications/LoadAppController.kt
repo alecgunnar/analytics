@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RestController
 import java.util.*
+import javax.servlet.http.HttpServletRequest
 
 @RestController
 class LoadAppController(
@@ -30,8 +31,12 @@ class LoadAppController(
 
     @GetMapping("/apps/{id}/script")
     fun getAppScript(
-            @PathVariable id: UUID
+            @PathVariable id: UUID,
+
+            request: HttpServletRequest
     ): AnalyticsAppScript {
-        return AnalyticsAppScript(id)
+        val url = String.format("%s://%s:%d", request.scheme, request.serverName, request.serverPort)
+
+        return AnalyticsAppScript(id, url)
     }
 }

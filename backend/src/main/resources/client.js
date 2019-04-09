@@ -1,8 +1,8 @@
 var analytics = {
-    run: function (appId) {
+    run: function (url, appId) {
         var request = new XMLHttpRequest();
 
-        request.open('POST', 'http://localhost:8080/apps/' + appId + '/hits');
+        request.open('POST', url + '/apps/' + appId + '/hits');
         request.send();
     }
 };

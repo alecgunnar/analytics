@@ -5,5 +5,7 @@ import java.util.*
 data class AnalyticsAppScript(
         val id: UUID,
 
-        val script: String = "<script>var s=document.createElement('script');s.src='http://localhost:8080/client';s.onload=function(){analytics.run('$id');};document.body.appendChild(s);</script>"
+        val url: String,
+
+        val script: String = "<script>var u='$url',s=document.createElement('script');s.src=u+'/client';s.onload=function(){analytics.run(u,'$id');};document.body.appendChild(s);</script>"
 )

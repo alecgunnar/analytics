@@ -65,7 +65,7 @@ class LoadAppControllerTest : AbstractIntegrationTest() {
                 get("/apps/$id/script")
         ).andExpect(status().isOk)
                 .andExpect(content().json("{" +
-                        "   \"script\": \"<script>var s=document.createElement('script');s.src='http://localhost:8080/client';s.onload=function(){analytics.run('$id');};document.body.appendChild(s);</script>\"" +
+                        "   \"script\": \"<script>var u='http://localhost:80',s=document.createElement('script');s.src=u+'/client';s.onload=function(){analytics.run(u,'$id');};document.body.appendChild(s);</script>\"" +
                         "}"))
     }
 
