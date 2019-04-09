@@ -1,12 +1,12 @@
 <template>
-    <div>
+    <form data-qa="create-app-form"
+          @submit="saveApp">
         <h2>Create an app</h2>
         <input data-qa="new-app-name-input"
                v-model="appName" />
         <button data-qa="create-app-submit-button"
-                @click="saveApp"
                 :disabled="appName === ''">Save</button>
-    </div>
+    </form>
 </template>
 
 <script>
@@ -20,7 +20,9 @@
             }
         },
         methods: {
-            saveApp() {
+            saveApp(e) {
+                e.preventDefault()
+
                 AppsService.createApplication(this.appName)
                     .then(this.appCreated)
             },

@@ -27,32 +27,40 @@ describe('CreateAppForm', () => {
     })
 
     context('a name is entered', () => {
-        let button
-
         beforeEach(() => {
             subject.find('[data-qa=new-app-name-input]').setValue('Sample App Name')
-
-            button = subject.find('[data-qa=create-app-submit-button]');
         })
 
         it('the submit button is not disabled', () => {
+            const button = subject.find('[data-qa=create-app-submit-button]')
             expect(button.attributes().disabled).to.be.undefined
         })
 
         context('the name is submitted', () => {
+            let submitEvent
+
             let createAppPromise
 
             beforeEach(() => {
+                submitEvent = new Event('submit')
+                sinon.spy(submitEvent, 'preventDefault')
+
                 createAppPromise = SynchronousPromise.unresolved()
 
                 sinon.stub(AppsService, 'createApplication')
                     .returns(createAppPromise)
 
-                button.trigger('click')
+                const form = subject.find('[data-qa=create-app-form]')
+
+                form.element.dispatchEvent(submitEvent)
             })
 
             afterEach(() => {
                 AppsService.createApplication.restore()
+            })
+
+            it('prevents the default submit behavior', () => {
+                sinon.assert.calledOnce(submitEvent.preventDefault)
             })
 
             it('calls the service with the app name', () => {
