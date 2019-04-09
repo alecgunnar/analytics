@@ -42,5 +42,11 @@
 
     .clientScript__script {
         background-color: #F1F1F1;
+        word-break: break-word;
+        text-align: left;
+        width: 400px;
+        margin: 20px auto 0;
+        padding: 20px;
+        box-sizing: border-box;
     }
 </style>
