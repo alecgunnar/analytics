@@ -55,7 +55,8 @@ class HitsControllerTest : AbstractIntegrationTest() {
                 get("/apps/$appId/hits")
         ).andExpect(status().isOk)
                 .andExpect(content().json("{" +
-                        "   \"count\": 1" +
+                        "   \"count\": 1," +
+                        "   \"tags\": []" +
                         "}"))
     }
 }
