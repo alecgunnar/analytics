@@ -23,7 +23,7 @@ class ScriptControllerTest : AbstractIntegrationTest() {
                         )
                 )
                 .andExpect(
-                        content().bytes(clientScript.file.readBytes())
+                        content().bytes(clientScript.inputStream.readBytes())
                 )
     }
 }

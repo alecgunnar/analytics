@@ -17,6 +17,6 @@ class ScriptController(
     ): ByteArray {
         response.contentType = "text/javascript"
 
-        return clientScript.file.readBytes()
+        return clientScript.inputStream.readBytes()
     }
 }
