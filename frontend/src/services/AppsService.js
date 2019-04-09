@@ -12,5 +12,9 @@ export default {
     async loadApplications() {
         const response = await axios.get('http://localhost:8080/apps')
         return response.data
+    },
+    async loadClientScript (id) {
+        const response = await axios.get(`http://localhost:8080/apps/${id}/script`)
+        return response.data.script
     }
 }

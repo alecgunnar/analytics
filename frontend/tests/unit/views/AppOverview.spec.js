@@ -6,6 +6,7 @@ import Router from 'vue-router'
 import AppOverview from '@/views/AppOverview'
 import AppsService from '@/services/AppsService'
 import HitsCounter from '@/components/overview/HitsCounter'
+import ScriptLoader from '@/components/overview/ScriptLoader'
 
 describe('AppOverview', () => {
     let subject
@@ -68,6 +69,13 @@ describe('AppOverview', () => {
 
         it('shows the hits counter', () => {
             const hitsCounter = subject.find(HitsCounter);
+
+            expect(hitsCounter.exists()).to.be.true
+            expect(hitsCounter.props('app')).to.deep.equal(appData)
+        })
+
+        it('shows the script loader', () => {
+            const hitsCounter = subject.find(ScriptLoader);
 
             expect(hitsCounter.exists()).to.be.true
             expect(hitsCounter.props('app')).to.deep.equal(appData)

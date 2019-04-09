@@ -134,4 +134,42 @@ describe('AppsService', () => {
             })
         })
     })
+
+    context('loading client script', () => {
+        let loadClientScriptPromise
+
+        beforeEach(() => {
+            loadClientScriptPromise = SynchronousPromise.unresolved()
+
+            sinon.stub(axios, 'get')
+                .returns(loadClientScriptPromise)
+        })
+
+        afterEach(() => {
+            axios.get.restore()
+        })
+
+        it('calls the backend', () => {
+            AppsService.loadClientScript('6379def0-6127-4b01-a587-e296c3d87b1d')
+
+            sinon.assert.calledOnce(axios.get)
+            sinon.assert.calledWith(axios.get, 'http://localhost:8080/apps/6379def0-6127-4b01-a587-e296c3d87b1d/script')
+        })
+
+        context('the script is loaded', () => {
+            beforeEach(() => {
+                loadClientScriptPromise.resolve({
+                    data: {
+                        script: '<script>alert("Hello World!");</script>'
+                    }
+                })
+            })
+
+            it('responds with the script', async () => {
+                const script = await AppsService.loadClientScript('6379def0-6127-4b01-a587-e296c3d87b1d')
+
+                expect(script).to.equal('<script>alert("Hello World!");</script>')
+            })
+        })
+    })
 })

@@ -5,6 +5,7 @@
         <div v-else>
             <h1 data-qa="app-name">{{ app.name }}</h1>
             <HitsCounter :app="app" />
+            <ScriptLoader :app="app" />
         </div>
     </div>
 </template>
@@ -12,6 +13,7 @@
 <script>
     import AppsService from "@/services/AppsService"
     import HitsCounter from "../components/overview/HitsCounter";
+    import ScriptLoader from "../components/overview/ScriptLoader";
 
     export default {
         name: "AppOverview",
@@ -39,6 +41,7 @@
             }
         },
         components: {
+            ScriptLoader,
             HitsCounter
         }
     }
