@@ -23,7 +23,7 @@ describe('AnalyticsService', () => {
             AnalyticsService.loadHitsCount('060c3954-560b-11e9-8647-d663bd873d93')
 
             sinon.assert.calledOnce(axios.get)
-            sinon.assert.calledWith(axios.get, 'http://localhost:8080/apps/060c3954-560b-11e9-8647-d663bd873d93/hits')
+            sinon.assert.calledWith(axios.get, 'http://analytics.apps/apps/060c3954-560b-11e9-8647-d663bd873d93/hits')
         })
 
         context('the data is loaded', () => {

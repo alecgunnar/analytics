@@ -22,7 +22,7 @@ describe('AppsService', () => {
             AppsService.createApplication('sample')
 
             sinon.assert.calledOnce(axios.post)
-            sinon.assert.calledWith(axios.post, 'http://localhost:8080/apps', {
+            sinon.assert.calledWith(axios.post, 'http://analytics.apps/apps', {
                 name: 'sample'
             })
         })
@@ -66,7 +66,7 @@ describe('AppsService', () => {
             AppsService.loadApplication('45133225-c57a-4a48-a1e1-7ee125532c0b')
 
             sinon.assert.calledOnce(axios.get)
-            sinon.assert.calledWith(axios.get, 'http://localhost:8080/apps/45133225-c57a-4a48-a1e1-7ee125532c0b')
+            sinon.assert.calledWith(axios.get, 'http://analytics.apps/apps/45133225-c57a-4a48-a1e1-7ee125532c0b')
         })
 
         context('the server responds', () => {
@@ -107,7 +107,7 @@ describe('AppsService', () => {
             AppsService.loadApplications()
 
             sinon.assert.calledOnce(axios.get)
-            sinon.assert.calledWith(axios.get, 'http://localhost:8080/apps')
+            sinon.assert.calledWith(axios.get, 'http://analytics.apps/apps')
         })
 
         context('the server responds', () => {
@@ -153,7 +153,7 @@ describe('AppsService', () => {
             AppsService.loadClientScript('6379def0-6127-4b01-a587-e296c3d87b1d')
 
             sinon.assert.calledOnce(axios.get)
-            sinon.assert.calledWith(axios.get, 'http://localhost:8080/apps/6379def0-6127-4b01-a587-e296c3d87b1d/script')
+            sinon.assert.calledWith(axios.get, 'http://analytics.apps/apps/6379def0-6127-4b01-a587-e296c3d87b1d/script')
         })
 
         context('the script is loaded', () => {
