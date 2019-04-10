@@ -1,7 +1,9 @@
 package com.ford.analytics.analytics.applications.analytics
 
 import com.ford.analytics.analytics.applications.analytics.data.HitsCount
+import com.ford.analytics.analytics.applications.analytics.data.RegisterHitRequest
 import org.springframework.web.bind.annotation.*
+import java.net.URL
 import java.util.*
 
 @RestController
@@ -18,8 +20,9 @@ class HitsController(
 
     @PostMapping
     fun registerHit(
-            @PathVariable appId: UUID
+            @PathVariable appId: UUID,
+            @RequestBody registerHitRequest: RegisterHitRequest
     ) {
-        return analyticsService.registerHit(appId)
+        return analyticsService.registerHit(appId, registerHitRequest)
     }
 }

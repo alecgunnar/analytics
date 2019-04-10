@@ -41,7 +41,8 @@ class HitsControllerTest : AbstractIntegrationTest() {
                 get("/apps/$appId/hits")
         ).andExpect(status().isOk)
                 .andExpect(content().json("{" +
-                        "   \"count\": 0" +
+                        "   \"count\": 0," +
+                        "   \"pages\": []" +
                         "}"))
     }
 
@@ -49,6 +50,10 @@ class HitsControllerTest : AbstractIntegrationTest() {
     fun `the total number of hits is returned`() {
         mockMvc.perform(
                 post("/apps/$appId/hits")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{" +
+                                "   \"url\": \"http://www.sample.com\"" +
+                                "}")
         ).andExpect(status().is2xxSuccessful)
 
         mockMvc.perform(
@@ -56,7 +61,12 @@ class HitsControllerTest : AbstractIntegrationTest() {
         ).andExpect(status().isOk)
                 .andExpect(content().json("{" +
                         "   \"count\": 1," +
-                        "   \"tags\": []" +
+                        "   \"pages\": [" +
+                        "       {" +
+                        "           \"url\": \"http://www.sample.com\"," +
+                        "           \"count\": 1" +
+                        "       }" +
+                        "   ]" +
                         "}"))
     }
 }
