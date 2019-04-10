@@ -52,7 +52,8 @@ class HitsControllerTest : AbstractIntegrationTest() {
                 post("/apps/$appId/hits")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{" +
-                                "   \"url\": \"http://www.sample.com\"" +
+                                "   \"url\": \"http://www.sample.com\"," +
+                                "   \"title\": \"Sample Page\"" +
                                 "}")
         ).andExpect(status().is2xxSuccessful)
 
@@ -63,6 +64,7 @@ class HitsControllerTest : AbstractIntegrationTest() {
                         "   \"count\": 1," +
                         "   \"pages\": [" +
                         "       {" +
+                        "           \"name\": \"Sample Page\"," +
                         "           \"url\": \"http://www.sample.com\"," +
                         "           \"count\": 1" +
                         "       }" +

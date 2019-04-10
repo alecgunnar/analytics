@@ -45,11 +45,13 @@ class AnalyticsServiceTest {
                 listOf(
                         HitEntity(
                                 URL("http://www.sample.com"),
+                                "Sample App",
                                 10,
                                 appEntity
                         ),
                         HitEntity(
                                 URL("http://www.sample.com/buy-now"),
+                                "Sample App - Buy Now",
                                 7,
                                 appEntity
                         )
@@ -63,8 +65,8 @@ class AnalyticsServiceTest {
 
         assertThat(hitsCount.count).isEqualTo(17)
         assertThat(hitsCount.pages).containsExactly(
-                Page(URL("http://www.sample.com"), 10),
-                Page(URL("http://www.sample.com/buy-now"), 7)
+                Page("Sample App", URL("http://www.sample.com"), 10),
+                Page("Sample App - Buy Now", URL("http://www.sample.com/buy-now"), 7)
         )
 
         verify(appsRepository).findById(appId)
@@ -86,11 +88,11 @@ class AnalyticsServiceTest {
 
         `when`(hitsRepository.findById(pageUrl)).thenReturn(Optional.empty())
 
-        subject.registerHit(appId, RegisterHitRequest(pageUrl))
+        subject.registerHit(appId, RegisterHitRequest(pageUrl, "Hello World"))
 
         verify(appsRepository).findById(appId)
         verify(hitsRepository).findById(pageUrl)
-        verify(hitsRepository).save(HitEntity(pageUrl, 1, appEntity))
+        verify(hitsRepository).save(HitEntity(pageUrl, "Hello World", 1, appEntity))
     }
 
     @Test
@@ -99,15 +101,15 @@ class AnalyticsServiceTest {
 
         `when`(hitsRepository.findById(pageUrl)).thenReturn(
                 Optional.of(
-                        HitEntity(pageUrl, 1, appEntity)
+                        HitEntity(pageUrl, "Hello World", 1, appEntity)
                 )
         )
 
-        subject.registerHit(appId, RegisterHitRequest(pageUrl))
+        subject.registerHit(appId, RegisterHitRequest(pageUrl, "Hello World"))
 
         verify(appsRepository).findById(appId)
         verify(hitsRepository).findById(pageUrl)
-        verify(hitsRepository).save(HitEntity(pageUrl, 2, appEntity))
+        verify(hitsRepository).save(HitEntity(pageUrl, "Hello World", 2, appEntity))
     }
 
     @Test(expected = AppNotFoundException::class)
@@ -118,6 +120,6 @@ class AnalyticsServiceTest {
                 Optional.empty()
         )
 
-        subject.registerHit(appId, RegisterHitRequest(pageUrl))
+        subject.registerHit(appId, RegisterHitRequest(pageUrl, "Hello World"))
     }
 }

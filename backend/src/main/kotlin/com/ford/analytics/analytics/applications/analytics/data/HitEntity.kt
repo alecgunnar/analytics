@@ -2,7 +2,6 @@ package com.ford.analytics.analytics.applications.analytics.data
 
 import com.ford.analytics.analytics.data.AppEntity
 import java.net.URL
-import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.Id
 import javax.persistence.ManyToOne
@@ -12,7 +11,8 @@ data class HitEntity(
         @Id
         val url: URL,
 
-        @Column(nullable = false)
+        val name: String,
+
         var count: Int,
 
         @ManyToOne

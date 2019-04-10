@@ -4,6 +4,6 @@ var analytics = {
 
         request.open('POST', url + '/apps/' + appId + '/hits');
         request.setRequestHeader('Content-Type', 'application/json');
-        request.send('{"url": "' + window.location + '"}');
+        request.send('{"url": "' + window.location + '", "title": "' + document.title + '"}');
     }
 };

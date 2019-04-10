@@ -20,7 +20,7 @@ class AnalyticsService(
         val hits = hitsRepository.findByApp(app)
 
         val count = hits.fold(0) { count, hit -> count + hit.count }
-        val pages = hits.map { Page(it.url, it.count) }
+        val pages = hits.map { Page(it.name, it.url, it.count) }
 
         return HitsCount(count, pages)
     }
@@ -29,7 +29,7 @@ class AnalyticsService(
         val app = loadApp(appId)
 
         val possibleHit = hitsRepository.findById(registerHitRequest.url)
-        var hit = HitEntity(registerHitRequest.url, 0, app)
+        var hit = HitEntity(registerHitRequest.url, registerHitRequest.title, 0, app)
 
         if (possibleHit.isPresent) hit = possibleHit.get()
 
