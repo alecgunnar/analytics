@@ -7,7 +7,7 @@
             <li data-qa="listed-page"
                 v-for="page in pages"
                 :key="page.url">
-                {{ page.url }} {{ page.count }}
+                {{ page.url }} ({{ page.name }}) {{ page.count }}
             </li>
         </ul>
         <div data-qa="no-pages-message"

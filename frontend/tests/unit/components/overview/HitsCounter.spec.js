@@ -52,10 +52,12 @@ describe('HitsCounter', () => {
                 pages: [
                     {
                         url: 'http://www.sample.com',
+                        name: 'Sample',
                         count: 115
                     },
                     {
                         url: 'http://www.sample.com/buy-now',
+                        name: 'Sample - Buy Now',
                         count: 8
                     }
                 ]
@@ -77,7 +79,7 @@ describe('HitsCounter', () => {
             const listedPages = subject.findAll('[data-qa=listed-page]');
 
             expect(listedPages.length).to.equal(2)
-            expect(listedPages.at(0).text()).to.equal('http://www.sample.com 115')
+            expect(listedPages.at(0).text()).to.equal('http://www.sample.com (Sample) 115')
         })
 
         it('schedules an interval to check for hits', () => {
