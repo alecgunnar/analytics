@@ -13,7 +13,7 @@ export default {
         const response = await axios.get(`${process.env.VUE_APP_BACKEND_URL}/apps`)
         return response.data
     },
-    async loadClientScript (id) {
+    async loadClientScript(id) {
         const response = await axios.get(`${process.env.VUE_APP_BACKEND_URL}/apps/${id}/script`)
         return response.data.script
     }

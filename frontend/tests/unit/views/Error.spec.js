@@ -13,7 +13,10 @@ describe('Error', () => {
                 {
                     path: '/error/:type',
                     name: 'error',
-                    component: { render () {} }
+                    component: {
+                        render() {
+                        }
+                    }
                 }
             ]
         })

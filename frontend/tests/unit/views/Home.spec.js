@@ -44,7 +44,10 @@ describe('CreateAppForm', () => {
 
         it('sends the user to the app', () => {
             sinon.assert.calledOnce(router.push)
-            sinon.assert.calledWith(router.push, {name: 'appOverview', params: {id: 'c3e83b52-84d1-4f70-8137-fcc270752aec'}})
+            sinon.assert.calledWith(router.push, {
+                name: 'appOverview',
+                params: {id: 'c3e83b52-84d1-4f70-8137-fcc270752aec'}
+            })
         })
     })
 
@@ -61,7 +64,10 @@ describe('CreateAppForm', () => {
 
         it('sends the user to the app', () => {
             sinon.assert.calledOnce(router.push)
-            sinon.assert.calledWith(router.push, {name: 'appOverview', params: {id: 'c3e83b52-84d1-4f70-8137-fcc270752aec'}})
+            sinon.assert.calledWith(router.push, {
+                name: 'appOverview',
+                params: {id: 'c3e83b52-84d1-4f70-8137-fcc270752aec'}
+            })
         })
     })
 })

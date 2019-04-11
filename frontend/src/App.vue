@@ -25,12 +25,12 @@
     export default {
         name: 'App',
         computed: {
-            showBackButton () {
+            showBackButton() {
                 return this.$route.name !== 'home'
             }
         },
         methods: {
-            goHome () {
+            goHome() {
                 this.$router.push({name: 'home'})
             }
         }

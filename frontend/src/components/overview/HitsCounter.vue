@@ -63,7 +63,7 @@
             }
         },
         computed: {
-            sortedPages () {
+            sortedPages() {
                 const sortedPages = [].concat(this.pages)
 
                 sortedPages.sort((a, b) => {

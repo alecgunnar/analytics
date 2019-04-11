@@ -11,7 +11,7 @@
     export default {
         name: 'error',
         methods: {
-            errorIs (type) {
+            errorIs(type) {
                 return this.$route.params.type === type
             }
         }

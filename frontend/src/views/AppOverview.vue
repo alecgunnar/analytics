@@ -1,14 +1,15 @@
 <template>
     <div>
         <div v-if="app === null"
-             data-qa="loading">Loading...</div>
+             data-qa="loading">Loading...
+        </div>
         <div v-else>
             <h1 data-qa="app-name">{{ app.name }}</h1>
             <div class="sideBySide">
                 <HitsCounter :app="app"
-                             class="sideBySide__side sideBySide__side--left" />
+                             class="sideBySide__side sideBySide__side--left"/>
                 <ScriptLoader :app="app"
-                              class="sideBySide__side sideBySide__side--right" />
+                              class="sideBySide__side sideBySide__side--right"/>
             </div>
         </div>
     </div>
@@ -21,21 +22,21 @@
 
     export default {
         name: "AppOverview",
-        data () {
+        data() {
             return {
                 app: null
             }
         },
-        mounted () {
+        mounted() {
             AppsService.loadApplication(this.$route.params.id)
                 .then(this.appLoaded)
                 .catch(this.appNotLoaded)
         },
         methods: {
-            appLoaded (data) {
+            appLoaded(data) {
                 this.app = data
             },
-            appNotLoaded () {
+            appNotLoaded() {
                 this.$router.push({
                     name: 'error',
                     params: {

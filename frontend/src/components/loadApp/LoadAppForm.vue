@@ -25,17 +25,17 @@
 
     export default {
         name: "LoadAppForm",
-        data () {
+        data() {
             return {
                 apps: []
             }
         },
-        mounted () {
+        mounted() {
             AppsService.loadApplications()
                 .then(this.appsLoaded)
         },
         methods: {
-            appsLoaded (apps) {
+            appsLoaded(apps) {
                 this.apps = apps
             }
         }
@@ -43,8 +43,8 @@
 </script>
 
 <style scoped>
-.apps {
-    list-style: none;
-    padding: 0;
-}
+    .apps {
+        list-style: none;
+        padding: 0;
+    }
 </style>
