@@ -1,6 +1,6 @@
 import LoadAppForm from '@/components/loadApp/LoadAppForm'
 import AppsService from "@/services/AppsService"
-import {shallowMount, createLocalVue} from "@vue/test-utils";
+import {mount, createLocalVue} from "@vue/test-utils";
 import Router from "vue-router"
 import {expect} from "chai"
 import sinon from "sinon"
@@ -11,6 +11,8 @@ describe('LoadAppForm', () => {
 
     let loadAppsPromise
 
+    let router
+
     beforeEach(() => {
         loadAppsPromise = SynchronousPromise.unresolved()
 
@@ -19,9 +21,16 @@ describe('LoadAppForm', () => {
         const localVue = createLocalVue()
         localVue.use(Router)
 
-        const router = new Router()
+        router = new Router({
+            routes: [
+                {
+                    name: 'appOverview',
+                    path: '/app/:id'
+                }
+            ]
+        })
 
-        subject = shallowMount(LoadAppForm, {
+        subject = mount(LoadAppForm, {
             router,
             localVue
         })
@@ -33,6 +42,14 @@ describe('LoadAppForm', () => {
 
     it('loads apps from the service', () => {
         sinon.assert.calledOnce(AppsService.loadApplications);
+    })
+
+    it('does not show the list of apps', () => {
+        expect(subject.find('[data-qa=list-of-apps]').exists()).to.be.false
+    })
+
+    it('shows the no apps created message', () => {
+        expect(subject.find('[data-qa=no-apps-message]').exists()).to.be.true
     })
 
     context('the apps are loaded', () => {
@@ -49,21 +66,25 @@ describe('LoadAppForm', () => {
             ])
         })
 
+        it('does not show the no apps created message', () => {
+            expect(subject.find('[data-qa=no-apps-message]').exists()).to.be.false
+        })
+
         it('renders a list of apps', () => {
             expect(subject.findAll('[data-qa=existing-app]').length).to.equal(2)
         })
 
         it('renders a link for each app', () => {
             const firstApp = subject.find('[data-qa=existing-app]')
-            const linkToApp = firstApp.find({name: 'RouterLink'});
+            const linkToApp = firstApp.find('[data-qa=go-to-app]');
 
-            expect(linkToApp.exists()).to.be.true
-            expect(linkToApp.props('to')).to.deep.equal({
-                name: 'appOverview',
-                params: {
-                    id: 'c53b3ec2-7528-4534-a260-59b74c0aa75a'
-                }
+            linkToApp.trigger('click')
+
+            expect(router.history.current.name).to.equal('appOverview')
+            expect(router.history.current.params).to.deep.equal({
+                id: 'c53b3ec2-7528-4534-a260-59b74c0aa75a'
             })
+
             expect(linkToApp.text()).to.equal('Sample App')
         })
     })

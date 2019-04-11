@@ -1,15 +1,22 @@
 <template>
     <section>
         <h2>Load an app</h2>
-        <ul class="apps">
+        <ul v-if="apps.length"
+            data-qa="list-of-apps"
+            class="apps">
             <li v-for="app in apps"
                 :key="app.id"
                 data-qa="existing-app">
-                <RouterLink :to="{name: 'appOverview', params: {id: app.id}}">
+                <RouterLink data-qa="go-to-app"
+                            :to="{name: 'appOverview', params: {id: app.id}}">
                     {{ app.name }}
                 </RouterLink>
             </li>
         </ul>
+        <p v-else
+           data-qa="no-apps-message">
+            No apps have been created.
+        </p>
     </section>
 </template>
 
