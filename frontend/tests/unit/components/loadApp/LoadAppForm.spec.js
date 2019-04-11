@@ -76,12 +76,14 @@ describe('LoadAppForm', () => {
 
         it('renders a link for each app', () => {
             const firstApp = subject.find('[data-qa=existing-app]')
-            const linkToApp = firstApp.find('[data-qa=go-to-app]');
+            const linkToApp = firstApp.find('[data-qa=go-to-app]')
 
             linkToApp.trigger('click')
 
-            expect(router.history.current.name).to.equal('appOverview')
-            expect(router.history.current.params).to.deep.equal({
+            const currentRoute = router.history.current;
+
+            expect(currentRoute.name).to.equal('appOverview')
+            expect(currentRoute.params).to.deep.equal({
                 id: 'c53b3ec2-7528-4534-a260-59b74c0aa75a'
             })
 
