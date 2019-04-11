@@ -1,6 +1,7 @@
 <template>
     <div class="clientScript">
-        Add the following script to your page:
+        <h2>Gathering Data</h2>
+        <p>Add the following script to your product in a location which ensures it will run during each page load.</p>
         <div data-qa="client-script"
              class="clientScript__script">
             {{ script }}
@@ -37,15 +38,14 @@
 
 <style scoped>
     .clientScript {
-        margin: 20px 0 0;
+
     }
 
     .clientScript__script {
-        background-color: #F1F1F1;
+        background-color: #ecf0f1;
+        font-family: courier, serif;
         word-break: break-word;
         text-align: left;
-        width: 400px;
-        margin: 20px auto 0;
         padding: 20px;
         box-sizing: border-box;
     }

@@ -1,15 +1,32 @@
 <template>
-  <div id="app">
-    <router-view/>
-  </div>
+    <div id="app">
+        <header class="header">
+            <div class="wrapper">
+                <div class="header__logo">analytics</div>
+            </div>
+        </header>
+        <main class="main">
+            <div class="wrapper">
+                <router-view/>
+            </div>
+        </main>
+    </div>
 </template>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<style scoped>
+    .wrapper {
+        max-width: 1280px;
+        margin: 0 auto;
+    }
+
+    .header,
+    .main {
+        padding: 20px;
+    }
+
+    .header {
+        background-color: #3498DB;
+        color: #FFF;
+        font-size: 2rem;
+    }
 </style>

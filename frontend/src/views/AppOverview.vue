@@ -4,8 +4,12 @@
              data-qa="loading">Loading...</div>
         <div v-else>
             <h1 data-qa="app-name">{{ app.name }}</h1>
-            <HitsCounter :app="app" />
-            <ScriptLoader :app="app" />
+            <div class="sideBySide">
+                <HitsCounter :app="app"
+                             class="sideBySide__side sideBySide__side--left" />
+                <ScriptLoader :app="app"
+                              class="sideBySide__side sideBySide__side--right" />
+            </div>
         </div>
     </div>
 </template>

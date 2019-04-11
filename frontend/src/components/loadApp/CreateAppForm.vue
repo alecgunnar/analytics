@@ -1,13 +1,18 @@
 <template>
-    <form data-qa="create-app-form"
-          @submit="saveApp">
+    <section>
         <h2>Create an app</h2>
         <p>Enter the name of your application:</p>
-        <input data-qa="new-app-name-input"
-               v-model="appName" />
-        <button data-qa="create-app-submit-button"
-                :disabled="appName === ''">Create</button>
-    </form>
+        <form data-qa="create-app-form"
+              class="form"
+              @submit="saveApp">
+            <input data-qa="new-app-name-input"
+                   type="text"
+                   v-model="appName"/>
+            <button data-qa="create-app-submit-button"
+                    :disabled="appName === ''">Create
+            </button>
+        </form>
+    </section>
 </template>
 
 <script>
@@ -15,7 +20,7 @@
 
     export default {
         name: "CreateAppForm",
-        data () {
+        data() {
             return {
                 appName: ''
             }
@@ -36,5 +41,12 @@
 </script>
 
 <style scoped>
+    .form {
+        display: flex;
+    }
 
+    .form input {
+        flex-grow: 1;
+        margin: 0 20px 0 0;
+    }
 </style>

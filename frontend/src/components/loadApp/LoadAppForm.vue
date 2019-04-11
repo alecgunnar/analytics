@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <section>
         <h2>Load an app</h2>
         <ul class="apps">
             <li v-for="app in apps"
@@ -10,7 +10,7 @@
                 </RouterLink>
             </li>
         </ul>
-    </div>
+    </section>
 </template>
 
 <script>

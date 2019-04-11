@@ -79,7 +79,11 @@ describe('HitsCounter', () => {
             const listedPages = subject.findAll('[data-qa=listed-page]');
 
             expect(listedPages.length).to.equal(2)
-            expect(listedPages.at(0).text()).to.equal('http://www.sample.com (Sample) 115')
+
+            const firstPage = listedPages.at(0);
+            expect(firstPage.find('[data-qa=page-count]').text()).to.equal('115')
+            expect(firstPage.find('[data-qa=page-url]').text()).to.equal('http://www.sample.com')
+            expect(firstPage.find('[data-qa=page-name]').text()).to.equal('Sample')
         })
 
         it('schedules an interval to check for hits', () => {

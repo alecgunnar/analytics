@@ -6,6 +6,88 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title>Analytics App</title>
+    <style>
+      html {
+        font-size: 18px;
+      }
+
+      body {
+        font-family: 'Avenir', Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        color: #2c3e50;
+        margin: 0;
+      }
+
+      a {
+        color: #2c3e50;
+      }
+
+      h1, h2, p {
+        margin: 0 0 20px;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      p {
+        font-size: 1rem;
+      }
+
+      .sideBySide {
+        display: flex;
+      }
+
+      .sideBySide__side {
+        width: 50%;
+      }
+
+      .sideBySide__side--left,
+      .sideBySide__side--right {
+        box-sizing: border-box;
+      }
+
+      .sideBySide__side--left {
+        margin: 0 10px 0 0;
+      }
+
+      .sideBySide__side--right {
+        margin: 0 0 0 10px;
+      }
+
+      input[type="text"],
+      button {
+        font-size: 1rem;
+        line-height: 1.25rem;
+        outline: none;
+        border: none;
+        border-radius: 3px;
+        padding: 10px;
+      }
+
+      button {
+        background-color: #2ECC71;
+        color: #fff;
+        padding: 10px 15px;
+        cursor: pointer;
+      }
+
+      button:active {
+        background-color: #27AE60;
+      }
+
+      button[disabled] {
+        background-color: #27AE60;
+        color: #f1f1f1;
+        cursor: default;
+      }
+
+    </style>
   </head>
   <body>
     <noscript>
