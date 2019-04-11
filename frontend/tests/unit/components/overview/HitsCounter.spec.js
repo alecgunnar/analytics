@@ -48,17 +48,22 @@ describe('HitsCounter', () => {
             sinon.stub(global, 'setTimeout').returns(123098)
 
             loadHitsCountPromise.resolve({
-                count: 123,
+                count: 135,
                 pages: [
                     {
-                        url: 'http://www.sample.com',
-                        name: 'Sample',
-                        count: 115
+                        url: 'http://www.sample.com/buy-again',
+                        name: 'Sample - Buy Now',
+                        count: 12
                     },
                     {
                         url: 'http://www.sample.com/buy-now',
                         name: 'Sample - Buy Now',
                         count: 8
+                    },
+                    {
+                        url: 'http://www.sample.com',
+                        name: 'Sample',
+                        count: 115
                     }
                 ]
             })
@@ -69,7 +74,11 @@ describe('HitsCounter', () => {
         })
 
         it('shows the number of hits', () => {
-            expect(subject.find('[data-qa=hits-count]').text()).to.equal('123')
+            expect(subject.find('[data-qa=hits-count]').text()).to.equal('135')
+        })
+
+        it('shows the number of pages', () => {
+            expect(subject.find('[data-qa=pages-count]').text()).to.equal('3')
         })
 
         it('shows the pages that were hit', () => {
@@ -78,12 +87,24 @@ describe('HitsCounter', () => {
 
             const listedPages = subject.findAll('[data-qa=listed-page]');
 
-            expect(listedPages.length).to.equal(2)
+            expect(listedPages.length).to.equal(3)
+
+            const page = listedPages.at(0);
+            expect(page.find('[data-qa=page-count]').text()).to.equal('115')
+            expect(page.find('[data-qa=page-url]').text()).to.equal('http://www.sample.com')
+            expect(page.find('[data-qa=page-name]').text()).to.equal('Sample')
+        })
+
+        it('orders the pages from most hits to fewest hits', () => {
+            const listedPages = subject.findAll('[data-qa=listed-page]');
 
             const firstPage = listedPages.at(0);
+            const secondPage = listedPages.at(1);
+            const thirdPage = listedPages.at(2);
+
             expect(firstPage.find('[data-qa=page-count]').text()).to.equal('115')
-            expect(firstPage.find('[data-qa=page-url]').text()).to.equal('http://www.sample.com')
-            expect(firstPage.find('[data-qa=page-name]').text()).to.equal('Sample')
+            expect(secondPage.find('[data-qa=page-count]').text()).to.equal('12')
+            expect(thirdPage.find('[data-qa=page-count]').text()).to.equal('8')
         })
 
         it('schedules an interval to check for hits', () => {

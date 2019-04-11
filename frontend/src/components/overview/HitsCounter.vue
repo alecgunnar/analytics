@@ -1,16 +1,25 @@
 <template>
     <div>
-        <div class="hitsCount">
-            <div data-qa="hits-count"
-                 class="hitsCount__count">
-                {{ count }}
+        <div class="stats">
+            <div class="stats__count">
+                <div data-qa="hits-count"
+                     class="stats__value">
+                    {{ count }}
+                </div>
+                Total Hits
             </div>
-            Total Hits
+            <div class="stats__count">
+                <div data-qa="pages-count"
+                     class="stats__value">
+                    {{ pages.length }}
+                </div>
+                Different Pages
+            </div>
         </div>
         <ul v-if="pages.length"
             data-qa="pages-list"
             class="listOfPages">
-            <li v-for="page in pages"
+            <li v-for="page in sortedPages"
                 :key="page.url"
                 data-qa="listed-page"
                 class="listOfPages__page">
@@ -53,6 +62,17 @@
                 required: true
             }
         },
+        computed: {
+            sortedPages () {
+                const sortedPages = [].concat(this.pages)
+
+                sortedPages.sort((a, b) => {
+                    return b.count - a.count
+                })
+
+                return sortedPages
+            }
+        },
         mounted() {
             this.loadHitsCount()
         },
@@ -75,15 +95,29 @@
 </script>
 
 <style scoped>
-    .hitsCount {
-        background-color: #ecf0f1;
-        text-align: center;
+    .stats {
+        display: flex;
         margin: 0 0 20px;
-        padding: 20px;
-        box-sizing: border-box;
     }
 
-    .hitsCount__count {
+    .stats__count {
+        background-color: #ecf0f1;
+        text-align: center;
+        margin: 0 10px;
+        padding: 20px;
+        box-sizing: border-box;
+        width: 50%;
+    }
+
+    .stats__count:first-of-type {
+        margin-left: 0;
+    }
+
+    .stats__count:last-of-type {
+        margin-right: 0;
+    }
+
+    .stats__value {
         font-size: 1.5rem;
     }
 
@@ -98,9 +132,12 @@
 
     .listOfPages__count {
         background-color: #ecf0f1;
+        text-align: center;
         float: right;
+        width: 75px;
         border-radius: 3px;
         padding: 10px 20px;
+        box-sizing: border-box;
     }
 
     .listOfPages__name {
