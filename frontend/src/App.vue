@@ -62,5 +62,6 @@
     .header__backButton {
         background: transparent;
         font-size: 1.25rem;
+        padding: 0;
     }
 </style>
